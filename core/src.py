@@ -5,7 +5,27 @@
 
 # 1、注册功能
 def register():
-    pass
+    while True:
+        # 第一层 让用户输入用户名和密码并校验
+        username = input('请输入用户名: ').strip()
+        password = input("请输入密码: ").strip()
+        re_password = input("请确认密码: ")
+        # 小逻辑处理: 比如两次密码是否一致
+        if password == re_password:
+            # 接收到注册后的结果
+            user_dict = {'username': username,
+                         'password': password,
+                         'balance': 15000,
+                         'flow': [],
+                         'shop_cart': {},
+                         'locked': False
+                         }
+            import json
+            import os
+            from conf import settings
+            user_path = os.path.join(settings.BASE_PATH, f'{username}.json')
+            with open(user_path, 'w', encoding='utf-8') as f:
+                json.dump(user_dict, f)
 
 
 # 2、登录功能
