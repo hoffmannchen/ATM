@@ -19,7 +19,10 @@ def register():
 
 # 2、登录功能
 def login():
-    pass
+    while True:
+        username = input('请输入用户名: ').strip()
+        password = input('密码: ').strip()
+        user_interface.login_interface(username, password)
 
 
 # 3、查看余额
@@ -94,11 +97,11 @@ def run():
         8、购物功能
         9、查看购物车
         10、管理员功能
-        ==== end ====
+        ====     end     ====
             """)
         choice = input("请输入功能编号: ").strip()
         if choice in func_dict:
-            func_dict.get(choice)()  # func_dict.get('1') --> register()
+            func_dict.get(choice)()
         else:
             print('请输入正确的功能编号！')
             continue
