@@ -48,7 +48,11 @@ def register():
         re_password = input("请确认密码: ")
         # 小逻辑处理: 比如两次密码是否一致
         if password == re_password:
-            user_interface.register_interface(username, password)
+            flag, msg = user_interface.register_interface(username, password)
+            # 用户视图层根据返回值判断是否成功
+            print(msg)
+            if flag:
+                break
 
 
 # 2、登录功能
