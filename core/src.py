@@ -6,50 +6,12 @@ from interface import user_interface
 
 # 1、注册功能
 def register():
-    """
-    def register():
     while True:
-        # 第一层 让用户输入用户名和密码并校验
         username = input('请输入用户名: ').strip()
         password = input("请输入密码: ").strip()
         re_password = input("请确认密码: ")
-        # 小逻辑处理: 比如两次密码是否一致
-        if password == re_password:
-            import json
-            import os
-            from conf import settings
-            user_path = os.path.join(settings.USER_DATA_PATH, f'{username}.json')
-            # 查看用户是否存在
-            if os.path.exists(user_path):
-                print("请重新输入!")
-                with open(user_path, 'r', encoding='utf8') as f:
-                    user_dict = json.load(f)
-                if user_dict:
-                    print("用户已存在，请重新输入!")
-                    continue
-            # 接收到注册后的结果
-
-            user_dict = {'username': username,
-                         'password': password,
-                         'balance': 15000,
-                         'flow': [],
-                         'shop_cart': {},
-                         'locked': False
-                         }
-
-            with open(user_path, 'w', encoding='utf-8') as f:
-                json.dump(user_dict, f, ensure_ascii=False)
-    :return:
-    """
-    while True:
-        # 第一层 让用户输入用户名和密码并校验
-        username = input('请输入用户名: ').strip()
-        password = input("请输入密码: ").strip()
-        re_password = input("请确认密码: ")
-        # 小逻辑处理: 比如两次密码是否一致
         if password == re_password:
             flag, msg = user_interface.register_interface(username, password)
-            # 用户视图层根据返回值判断是否成功
             print(msg)
             if flag:
                 break
