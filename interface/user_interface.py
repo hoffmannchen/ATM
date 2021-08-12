@@ -4,6 +4,7 @@
 """
 
 from db import db_handler
+from lib import common
 
 
 def register_interface(username, password, balance=15000):
@@ -11,6 +12,7 @@ def register_interface(username, password, balance=15000):
     if user_dict:
         return False, '用户名已存在!'
     else:
+        password = common.get_wd_md5(password)
         user_dict = {'username': username,
                      'password': password,
                      'balance': balance,
@@ -24,8 +26,12 @@ def register_interface(username, password, balance=15000):
 
 
 def login_interface(username, password):
+    password = common.get_wd_md5(password)
     user_dict = db_handler.select(username)
     if user_dict:
         if user_dict.get('password') == password:
-            return True
-    return False
+            return True, f"用户: [{username}]登录成功！"
+        else:
+            return False, '密码错误！'
+
+    return False, f"用户不存在，请重新输入！"

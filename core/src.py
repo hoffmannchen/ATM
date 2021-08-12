@@ -2,6 +2,9 @@
 存放用户视图层
 """
 from interface import user_interface
+from lib import common
+
+login_user = None
 
 
 # 1、注册功能
@@ -22,40 +25,54 @@ def login():
     while True:
         username = input('请输入用户名: ').strip()
         password = input('密码: ').strip()
-        user_interface.login_interface(username, password)
+        flag, msg = user_interface.login_interface(username, password)
+        if flag:
+            print(msg)
+            global login_user
+            login_user = username
+            break
+        else:
+            print(msg)
 
 
 # 3、查看余额
+@common.logging_auth
 def check_balance():
-    pass
+    print('查账功能...')
 
 
 # 4、提现功能
+@common.logging_auth
 def withdraw():
     pass
 
 
 # 5、还款功能
+@common.logging_auth
 def repay():
     pass
 
 
 # 6、转账功能
+@common.logging_auth
 def transfer():
     pass
 
 
 # 7、查看流水
+@common.logging_auth
 def check_flow():
     pass
 
 
 # 8、购物功能
+@common.logging_auth
 def shopping():
     pass
 
 
 # 9、查看购物车
+@common.logging_auth
 def check_shop_cart():
     pass
 
