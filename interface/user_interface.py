@@ -35,3 +35,8 @@ def login_interface(username, password):
             return False, '密码错误！'
 
     return False, f"用户不存在，请重新输入！"
+
+
+def check_bal_interface(username):
+    user_dict = db_handler.select(username)
+    return user_dict.get('balance')

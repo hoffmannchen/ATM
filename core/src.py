@@ -3,6 +3,7 @@
 """
 from interface import user_interface
 from lib import common
+from interface import bank_interface
 
 login_user = None
 
@@ -38,13 +39,24 @@ def login():
 # 3、查看余额
 @common.logging_auth
 def check_balance():
-    print('查账功能...')
+    balance = user_interface.check_bal_interface(login_user)
+    print(f'用户{login_user}账户余额为: {balance}')
 
 
 # 4、提现功能
 @common.logging_auth
 def withdraw():
-    pass
+    while True:
+        inout_money = input('请输入提现金额: ').strip()
+        if inout_money.isdigit():
+            inout_money = int(inout_money)
+        else:
+            print('请重新输入数字!')
+            continue
+        flag, msg = bank_interface.withdraw_interface(login_user, inout_money)
+        print(msg)
+        if flag:
+            break
 
 
 # 5、还款功能
