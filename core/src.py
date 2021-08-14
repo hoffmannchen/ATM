@@ -13,7 +13,7 @@ def register():
     while True:
         username = input('请输入用户名: ').strip()
         password = input("请输入密码: ").strip()
-        re_password = input("请确认密码: ")
+        re_password = input("请确认密码: ").strip()
         if password == re_password:
             flag, msg = user_interface.register_interface(username, password)
             print(msg)
@@ -25,7 +25,7 @@ def register():
 def login():
     while True:
         username = input('请输入用户名: ').strip()
-        password = input('密码: ').strip()
+        password = input('请输入密码: ').strip()
         flag, msg = user_interface.login_interface(username, password)
         if flag:
             print(msg)
@@ -47,13 +47,13 @@ def check_balance():
 @common.logging_auth
 def withdraw():
     while True:
-        inout_money = input('请输入提现金额: ').strip()
-        if inout_money.isdigit():
-            inout_money = int(inout_money)
+        input_money = input('请输入提现金额: ').strip()
+        if input_money.isdigit():
+            input_money = int(input_money)
         else:
             print('请重新输入数字!')
             continue
-        flag, msg = bank_interface.withdraw_interface(login_user, inout_money)
+        flag, msg = bank_interface.withdraw_interface(login_user, input_money)
         print(msg)
         if flag:
             break
@@ -62,7 +62,25 @@ def withdraw():
 # 5、还款功能
 @common.logging_auth
 def repay():
-    pass
+    """
+    还款金额任意大小
+    :return:
+    """
+    while True:
+        input_money = input("请输入还款金额: ").strip()
+        if not input_money.isdigit():
+            print("请重新输入数字!")
+            continue
+
+        input_money = int(input_money)
+        if input_money > 0:
+            flag, msg = bank_interface.repay_interface(login_user, input_money)
+            if flag:
+                print(msg)
+            break
+        else:
+            print('还款金额必须大于0!')
+            continue
 
 
 # 6、转账功能

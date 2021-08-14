@@ -33,8 +33,8 @@ def login_interface(username, password):
             return True, f"用户: [{username}]登录成功！"
         else:
             return False, '密码错误！'
-
-    return False, f"用户不存在，请重新输入！"
+    else:
+        return False, f"用户不存在，请重新输入！"
 
 
 def check_bal_interface(username):
