@@ -86,7 +86,18 @@ def repay():
 # 6、转账功能
 @common.logging_auth
 def transfer():
-    pass
+    while True:
+        to_user = input('请输入目标账户: '.strip())
+        money = input("请输入转账金额: ").strip()
+        if not money.isdigit():
+            print("请输入正确的金额!")
+            continue
+        flag, msg = bank_interface.transfer_interface(login_user, to_user, int(money))
+        print(msg)
+        if flag:
+            break
+        else:
+            continue
 
 
 # 7、查看流水

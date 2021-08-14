@@ -14,6 +14,7 @@ def get_wd_md5(password):
 
 def logging_auth(func):
     from core import src
+
     def inner(*args, **kwargs):
         if src.login_user:
             res = func(*args, **kwargs)
