@@ -103,7 +103,13 @@ def transfer():
 # 7、查看流水
 @common.logging_auth
 def check_flow():
-    pass
+    flag, flow_list = bank_interface.check_flow_interface(login_user)
+    if flag:
+        if flow_list:
+            for i in flow_list:
+                print(i)
+        else:
+            print('当前用户没有流水！')
 
 
 # 8、购物功能

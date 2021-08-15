@@ -1,8 +1,11 @@
 {
   "username": "veronica",
   "password": "19e5b784f4c7bb65815449622ea60537",
-  "balance": 68000,
-  "flow": [],
+  "balance": 6000,
+  "flow": [
+    "用户[veronica]接收到用户[hoffmann]转账3000元！",
+    "用户[veronica]转账2000元给用户[hoffmann]成功！"
+  ],
   "shop_cart": {},
   "locked": false
 }
