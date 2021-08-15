@@ -4,6 +4,7 @@
 from interface import user_interface
 from lib import common
 from interface import bank_interface
+from interface import shop_interface
 from lib.common import logging_auth
 
 login_user = None
@@ -116,12 +117,48 @@ def check_flow():
 # 8、购物功能
 @common.logging_auth
 def shopping():
-    pass
+    shop_list = [
+        ['上海灌汤包', 30],
+        ['爱根写真抱枕', 250],
+        ['广东凤爪', 28],
+        ['香港地道鱼丸', 15],
+        ['坦克', 100000],
+        ['macbook', 20000]
+    ]
+
+    shopping_car = {}
+    while True:
+        for index, shop in enumerate(shop_list):
+            shop_name, shop_price = shop
+            print(f'商品编号: [{index}] 商品名称: [{shop_name}] 价格: [{shop_price}]')
+        choice = input('请输入商品编号 (是否结账输入[y|n}) : ')
+        if choice == 'y':
+            if not shopping_car:
+                print("当前购物车为空，不能支付，请重新输入！")
+                continue
+            shop_interface.shopping_interface(login_user, shopping_car)
+        elif choice == 'n':
+            if not shopping_car:
+                print("当前购物车为空，不能添加，请重新输入！")
+                continue
+            pass
+        if not choice.isdigit():
+            print('请输入正确的编号!')
+            continue
+        choice = int(choice)
+        if choice not in range(len(shop_list)):
+            print('请输入正确的编号!')
+            continue
+        shop_name, shop_price = shop_list[choice]
+        if shop_name in shopping_car:
+            shopping_car[shop_name][1] += 1
+        else:
+            shopping_car[shop_name] = [shop_price, 1]
 
 
 # 9、查看购物车
 @common.logging_auth
-def check_shop_cart():
+def check_shop_car():
     pass
 
 
@@ -142,7 +179,7 @@ func_dict = {
     '6': transfer,
     '7': check_flow,
     '8': shopping,
-    '9': check_shop_cart,
+    '9': check_shop_car,
     '10': admin
 }
 
