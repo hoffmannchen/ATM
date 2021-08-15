@@ -4,6 +4,7 @@
 from interface import user_interface
 from lib import common
 from interface import bank_interface
+from lib.common import logging_auth
 
 login_user = None
 
@@ -124,9 +125,11 @@ def check_shop_cart():
     pass
 
 
+@logging_auth
 # 10、管理员功能
 def admin():
-    pass
+    from core import admin
+    admin.admin_run()
 
 
 # 创建函数功能字典
