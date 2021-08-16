@@ -171,7 +171,8 @@ def shopping():
 # 9、查看购物车
 @common.logging_auth
 def check_shop_car():
-    pass
+    shop_car = shop_interface.check_shop_car_interface(login_user)
+    print(shop_car)
 
 
 @logging_auth

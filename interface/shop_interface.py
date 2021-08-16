@@ -26,3 +26,8 @@ def add_shop_car_interface(login_user, shopping_car):
             user_dict['shop_car'][shop_name] = [price, number]
     db_handler.save(user_dict)
     return True, '添加购物车成功！'
+
+
+def check_shop_car_interface(login_user):
+    user_dict = db_handler.select(login_user)
+    return user_dict.get('shop_car')

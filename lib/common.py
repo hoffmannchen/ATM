@@ -2,6 +2,8 @@
 存放公共方法
 """
 import hashlib
+import logging.config
+from conf import settings
 
 
 def get_wd_md5(password):
@@ -24,3 +26,15 @@ def logging_auth(func):
             src.login()
 
     return inner
+
+
+def get_logger(log_type):
+    """
+
+    :param log_type:user日志、bank日志、shop日志
+    :return:
+    """
+    logging.config.dictConfig(settings.LOGGING_DIC)
+    logger = logging.getLogger(log_type)
+
+    return logger
