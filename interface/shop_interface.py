@@ -6,7 +6,7 @@ from db import db_handler
 
 def shopping_interface(login_user, shopping_car):
     cost = 0
-    for price, number in shopping_car.values:
+    for price, number in shopping_car.values():
         cost += price * number
     # 逻辑校验成功后，再调用银行支付接口
     from interface import bank_interface
