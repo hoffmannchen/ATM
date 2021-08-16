@@ -17,7 +17,7 @@ def register_interface(username, password, balance=15000):
                      'password': password,
                      'balance': balance,
                      'flow': [],
-                     'shop_cart': {},
+                     'shop_car': {},
                      'locked': False
                      }
 

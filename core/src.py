@@ -117,6 +117,7 @@ def check_flow():
 # 8、购物功能
 @common.logging_auth
 def shopping():
+    # 创建商品列表
     shop_list = [
         ['上海灌汤包', 30],
         ['爱根写真抱枕', 250],
@@ -125,23 +126,32 @@ def shopping():
         ['坦克', 100000],
         ['macbook', 20000]
     ]
-
+    # 初始化当前购物车
     shopping_car = {}
     while True:
+        print('=' * 40)
         for index, shop in enumerate(shop_list):
             shop_name, shop_price = shop
             print(f'商品编号: [{index}] 商品名称: [{shop_name}] 价格: [{shop_price}]')
-        choice = input('请输入商品编号 (是否结账输入[y|n}) : ')
+        print('=' * 40)
+        choice = input('请输入商品编号 (是否结账输入[y|n]) : ').strip()
         if choice == 'y':
             if not shopping_car:
                 print("当前购物车为空，不能支付，请重新输入！")
                 continue
-            shop_interface.shopping_interface(login_user, shopping_car)
+            flag, msg = shop_interface.shopping_interface(login_user, shopping_car)
+            print(msg)
+            if flag:
+                break
         elif choice == 'n':
             if not shopping_car:
                 print("当前购物车为空，不能添加，请重新输入！")
                 continue
-            pass
+            flag, msg = shop_interface.add_shop_car_interface(login_user, shopping_car)
+            print(msg)
+            if flag:
+                break
+
         if not choice.isdigit():
             print('请输入正确的编号!')
             continue
@@ -154,6 +164,8 @@ def shopping():
             shopping_car[shop_name][1] += 1
         else:
             shopping_car[shop_name] = [shop_price, 1]
+
+        print('当前购物车: ', shopping_car)
 
 
 # 9、查看购物车

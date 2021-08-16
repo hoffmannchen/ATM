@@ -1,6 +1,8 @@
 """
 银行相关业务接口
 """
+import db as db
+
 from db import db_handler
 
 
@@ -51,3 +53,14 @@ def transfer_interface(login_user, to_user, money):
 def check_flow_interface(login_user):
     user_dict = db_handler.select(login_user)
     return True, user_dict.get('flow')
+
+
+def pay_interface(login_user, cost):
+    user_dict = db_handler.select(login_user)
+    if cost > user_dict['balance']:
+        return False
+    user_dict['balance'] -= cost
+    flow = f'用户消费金额: [{cost}]元'
+    user_dict['flow'].append(flow)
+    db_handler.save(user_dict)
+    return True
