@@ -1,0 +1,2 @@
+2021-08-17 10:36:02,388 - MainThread:4378815936 - 日志名字:user - user_interface.py:43 -INFO - 用户: [hoffmann]登录成功！
+2021-08-17 10:36:07,440 - MainThread:4378815936 - 日志名字:admin - admin_interface.py:25 -INFO - 冻结用户[veronica]成功！

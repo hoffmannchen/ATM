@@ -32,11 +32,12 @@ def register_interface(username, password, balance=15000):
 def login_interface(username, password):
     password = common.get_wd_md5(password)
     user_dict = db_handler.select(username)
-    if user_dict['locked']:
-        msg = '该账户已被冻结！'
-        user_logger.warning(msg)
-        return False, msg
+
     if user_dict:
+        if user_dict['locked']:
+            msg = '该账户已被冻结！'
+            user_logger.warning(msg)
+            return False, msg
         if user_dict.get('password') == password:
             msg = f"用户: [{username}]登录成功！"
             user_logger.info(msg)

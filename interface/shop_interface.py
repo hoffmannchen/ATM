@@ -2,6 +2,9 @@
 购物商城接口
 """
 from db import db_handler
+from lib import common
+
+shop_logger = common.get_logger('shop')
 
 
 def shopping_interface(login_user, shopping_car):
@@ -12,8 +15,12 @@ def shopping_interface(login_user, shopping_car):
     from interface import bank_interface
     flag = bank_interface.pay_interface(login_user, cost)
     if flag:
-        return True, '支付成功, 准备发货！'
-    return False, '支付失败,金额不足！'
+        msg = f'{login_user}支付{cost}元成功, 准备发货！'
+        shop_logger.info(msg)
+        return True, msg
+    msg = f'用户{login_user}支付失败,金额不足！'
+    shop_logger.warning(msg)
+    return False, msg
 
 
 def add_shop_car_interface(login_user, shopping_car):
@@ -25,7 +32,9 @@ def add_shop_car_interface(login_user, shopping_car):
         else:
             user_dict['shop_car'][shop_name] = [price, number]
     db_handler.save(user_dict)
-    return True, '添加购物车成功！'
+    msg = f'用户{login_user}添加购物车成功！'
+    shop_logger.info(msg)
+    return True, msg
 
 
 def check_shop_car_interface(login_user):

@@ -1,11 +1,13 @@
 {
   "username": "hoffmann",
   "password": "19e5b784f4c7bb65815449622ea60537",
-  "balance": 8692,
+  "balance": 8057.0,
   "flow": [
     "用户[hoffmann]转账3000元给用户[veronica]成功！",
     "用户[hoffmann]接收到用户[veronica]转账2000元！",
-    "用户消费金额: [308]元"
+    "用户消费金额: [308]元",
+    "用户hoffmann提现金额100成功，手续费为5.0,现余额为8587.0",
+    "用户消费金额: [530]元"
   ],
   "shop_car": {
     "上海灌汤包": [
